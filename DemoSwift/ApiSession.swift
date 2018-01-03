@@ -30,7 +30,7 @@ public class ApiSession {
             }
             
             // Decodable must have data length at least.
-            guard let data = data else {
+            guard let data = data, data.count > 0 else {
                 DispatchQueue.main.async {
                     closure(.failed(ApiError.empytDate(response)))
                 }
