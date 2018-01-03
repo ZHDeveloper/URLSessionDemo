@@ -23,13 +23,17 @@ public class ApiSession {
 
             // If the dataTask error is occured.
             if let error = error {
-                closure(.failed(ApiError.unexpected(error,response)))
+                DispatchQueue.main.async {
+                    closure(.failed(ApiError.unexpected(error,response)))
+                }
                 return
             }
             
             // Decodable must have data length at least.
             guard let data = data else {
-                closure(.failed(ApiError.empytDate(response)))
+                DispatchQueue.main.async {
+                    closure(.failed(ApiError.empytDate(response)))
+                }
                 return
             }
             
@@ -41,7 +45,9 @@ public class ApiSession {
                     closure(.success(result))
                 }
             } catch {
-                closure(.failed(ApiError.objectMapping(error,response)))
+                DispatchQueue.main.async {
+                    closure(.failed(ApiError.objectMapping(error,response)))
+                }
             }
         }
         
@@ -49,14 +55,4 @@ public class ApiSession {
     }
 }
 
-//extension URLResponse {
-//
-//    public func filter(statusCodes: ClosedRange<Int>) throws -> Response {
-//        guard statusCodes.contains(statusCode) else {
-//            throw MoyaError.statusCode(self)
-//        }
-//        return self
-//    }
-//
-//}
 

@@ -32,11 +32,27 @@ public struct ApiResponse {
 }
 
 public enum ApiError: Error {
-    case unexpected(Swift.Error, ApiResponse)
+    
+    case unexpected(Error, ApiResponse)
     case empytDate(ApiResponse)
-    case objectMapping(Swift.Error, ApiResponse)
-    case encodableMapping(Swift.Error, ApiResponse)
+    case objectMapping(Error, ApiResponse)
     case statusCode(ApiResponse)
+    
+    var response: ApiResponse {
+        switch self {
+        case .unexpected(_, let resp):
+            return resp
+        case .empytDate(let resp):
+            return resp
+        case .objectMapping(_, let resp):
+            return resp
+        case .statusCode(let resp):
+            return resp
+        }
+    }
+    
+    
+    
 }
 
 public struct BaseModel: Codable {
