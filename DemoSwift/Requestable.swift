@@ -21,9 +21,6 @@ public protocol Requestable {
     // The header field of HTTP.
     var headerField: [String: String] { get }
     
-    // If the request needs OAuth authorization, this will set `true`. The default value is `false`.
-    var isAuthorizedRequest: Bool { get }
-    
     // Set http method. Example: `.get`
     var httpMethod: HTTPMethod { get }
     
@@ -33,8 +30,6 @@ public protocol Requestable {
     // Additional query paramters for URL, The default value is `[:]`.
     var queryParameters: [String: Any] { get }
 }
-
-//https://yuetao.66boss.com/v1/public/checkupdate
 
 public extension Requestable {
     
@@ -50,11 +45,7 @@ public extension Requestable {
         let header: [String: String] = [:]
         return header
     }
-    
-    public var isAuthorizedRequest: Bool {
-        return false
-    }
-    
+
     public var httpBody: Data? {
         return nil
     }
