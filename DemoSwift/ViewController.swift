@@ -8,16 +8,41 @@
 
 import UIKit
 
+struct UpdateRequest: Requestable {
+    
+    var path: String {
+        return "public/checkupdate"
+    }
+    
+    var httpMethod: HTTPMethod {
+        return .get
+    }
+    
+    typealias Response = BaseModel
+}
+
 class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-    }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        let request = UpdateRequest()
+        
+        ApiSession.shared.send(request) { (result) in
+            
+            print(Thread.current)
+            
+            switch result {
+            case .success(let resp):
+                print(resp)
+                break
+            case .failed(let error):
+                print(error.localizedDescription)
+                break
+            }
+            
+        }
+        
     }
 
 
