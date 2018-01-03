@@ -1,8 +1,9 @@
 //
-//  HttpMethod.swift
-//  YoutubeKit
+//  ApiConstants.swift
+//  DemoSwift
 //
-//  Created by Ryo Ishikawa on 12/30/2017
+//  Created by ZhiHua Shen on 2018/1/2.
+//  Copyright © 2018年 ZhiHua Shen. All rights reserved.
 //
 
 import Foundation
